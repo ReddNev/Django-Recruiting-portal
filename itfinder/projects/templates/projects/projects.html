@@ -8,6 +8,7 @@
 {% for project in projects %}
 <p>Номер проекта: #{{ project.id }}</p>
 <h3>Название проекта: <a href="{% url 'project' project.id %}">{{ project.title }}</a></h3>
+<strong><a href="{% url 'create-project' %}">Добавить проект</a></strong>
 <em>{{ project.description }}</em>
 {% endfor %}
 </body>
