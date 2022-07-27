@@ -1,6 +1,6 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from .forms import ProjectForm
-from .models import Project
+from .models import Project, Tag
 
 
 def projects(request):
@@ -45,3 +45,13 @@ def deleteProject(request, pk):
         return redirect('projects')
     context = {'object': project}
     return render(request, 'projects/delete.html', context)
+
+
+def projects_by_tag(request, tag_slug):
+    tag = get_object_or_404(Tag, slug=tag_slug)
+    projects = Project.objects.filter(tags__in=[tag])
+    context = {
+        "projects": projects
+    }
+
+    return render(request, "projects/projects.html", context)
