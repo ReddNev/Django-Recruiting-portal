@@ -15,10 +15,10 @@ def project(request, pk):
     return render(request, 'projects/single-project.html', {'project': projectObj})
 
 
-def createProject(request):
+def create_project(request):
     form = ProjectForm()
     if request.method == 'POST':
-        form = ProjectForm(request.POST)
+        form = ProjectForm(request.POST, request.FILES)
         if form.is_valid():
             form.save()
             return redirect('projects')
@@ -26,11 +26,11 @@ def createProject(request):
     return render(request, 'projects/project_form.html', context)
 
 
-def updateProject(request, pk):
+def update_project(request, pk):
     project = Project.objects.get(id=pk)
     form = ProjectForm(instance=project)
     if request.method == 'POST':
-        form = ProjectForm(request.POST, instance=project)
+        form = ProjectForm(request.POST, request.FILES, instance=project)
         if form.is_valid():
             form.save()
             return redirect('projects')
@@ -38,7 +38,7 @@ def updateProject(request, pk):
     return render(request, 'projects/project_form.html', context)
 
 
-def deleteProject(request, pk):
+def delete_project(request, pk):
     project = Project.objects.get(id=pk)
     if request.method == 'POST':
         project.delete()
