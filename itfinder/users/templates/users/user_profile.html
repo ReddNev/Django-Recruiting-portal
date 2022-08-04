@@ -8,7 +8,7 @@
             <div class="column column--1of3">
                 <div class="card text-center">
                     <div class="card__body dev">
-                        <img class="avatar avatar--xl" src="{{ profile.image.url }}"/>
+                        <img class="avatar avatar--xl" src="{{ profile.image.url }}" />
                         <h2 class="dev__name">{{ profile.name }}</h2>
                         <p class="dev__title">{{ profile.intro }}</p>
                         <p class="dev__location">Город: {{ profile.city }}</p>
@@ -67,6 +67,7 @@
                         {% endfor %}
 
 
+
                         <h3 class="devInfo__subtitle">Дополнительные навыки</h3>
                         <div class="devInfo__otherSkills">
 
@@ -85,18 +86,17 @@
                         {% for project in profile.project_set.all %}
                         <div class="column">
                             <div class="card project">
-                                <a href="{% url 'project' project.id %}" class="project">
+                                <a href="{% url 'project' project.slug %}" class="project">
                                     <img class="project__thumbnail" src="{{ project.image.url }}"
-                                         alt="project thumbnail"/>
+                                        alt="project thumbnail" />
                                     <div class="card__body">
                                         <h3 class="project__title">{{ project.title }}</h3>
                                         <p><a class="project__author"
-                                              href="{% url 'user-profile' project.owner.id %}">Разработчик:
-                                            {{ project.owner.name }}</a>
+                                                href="{% url 'user-profile' project.owner %}">Разработчик:
+                                                {{ project.owner.name }}</a>
                                         </p>
                                         <p class="project--rating">
-                                            <span style="font-weight: bold;">положительные отзывы</span>{{
-                                            project.votes_ratio }}% всего отзывов{{ project.total_votes }}
+                                            <span style="font-weight: bold;">положительные отзывы</span>{{ project.votes_ratio }}% всего отзывов{{ project.total_votes }}
                                         </p>
                                         <div class="project__tags">
 
