@@ -1,8 +1,11 @@
 from django.shortcuts import render, redirect, get_object_or_404
-from .models import Project, Tag
-from .forms import ProjectForm, ReviewForm
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
+from django.core import paginator
+from .utils import paginate_projects
+
+from .models import Project, Tag
+from .forms import ProjectForm, ReviewForm
 
 
 def projects(request):
