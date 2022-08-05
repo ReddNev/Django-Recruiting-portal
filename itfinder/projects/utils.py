@@ -5,7 +5,7 @@ from .models import Project, Tag
 
 
 def paginate_projects(request, projects, results):
-    page = request.Get.get('page')
+    page = request.GET.get('page')
     paginator = Paginator(projects, results)
 
     try:
@@ -34,11 +34,10 @@ def paginate_projects(request, projects, results):
 
 def search_projects(request):
     search_query = ''
-
-    if request.Get.get('search_query'):
-        search_query = request.Get.get('search_query')
-
+    if request.GET.get('search_query'):
+        search_query = request.GET.get('search_query')
     tags = Tag.objects.filter(name__icontains=search_query)
+
 
     projects = Project.objects.distinct().filter(
         Q(title__icontains=search_query) |
@@ -47,3 +46,4 @@ def search_projects(request):
         Q(tags__in=tags)
     )
     return projects, search_query
+
